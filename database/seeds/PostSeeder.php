@@ -14,16 +14,12 @@ class PostSeeder extends Seeder
      */
     public function run(Faker $faker)
     {
-        $new_post = new Post();
-        $new_post->title = 'ciao come stai';
-        $new_post->slug = Post::generateSlug('ciao come stai');
-        $new_post->text = $faker->text();
-        $new_post->save();
-        // $new_post->title = $faker->sentence();
-        // $new_post->slug = Post::generateSlug($new_post->title);
-        // $new_post->slug = $faker->text();
-        // $new_post->save();
-
-
+        for ($i=0; $i < 20; $i++) {
+            $new_post = new Post();
+            $new_post->title = $faker->sentence();
+            $new_post->slug = Post::generateSlug($new_post->title);
+            $new_post->text = $faker->text();
+            $new_post->save();
+        }
     }
 }

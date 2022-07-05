@@ -14,9 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('guest.welcome');
+})->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::middleware('auth')->get('/home', 'Admin\HomeController@index')->name('admin');
+
+// Raggruppo le rotte protette da autenticazione
+Route::middleware('auth')
+    ->prefix('admin')
+    ->name('admin.')
+    ->namespace('Admin')
+    ->group(function(){
+        Route::get('/home', 'HomeController@index')->name('home'); // Rimuovo Admin\ perche lo aggiunge il namespace e il nome
+        Route::resource('posts', 'PostController');
+    });
