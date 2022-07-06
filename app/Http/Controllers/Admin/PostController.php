@@ -107,6 +107,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $titolo = $post->title;
+        $post->delete();
+        return redirect()->route('admin.posts.index', compact('titolo'))->with('confirm', 'Hai eliminato correttamente il post ')->with('titolo', $titolo);
     }
 }
