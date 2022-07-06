@@ -15,8 +15,8 @@
             </div>
             <div class="mb-3">
               <label for="image" class="form-label">Corpo del post</label>
-              <input type="text" class="form-control @error('content') is-invalid @enderror" name="content" id="content"  value='{{ old('content') }}'>
-                @error('content')
+              <input type="text" class="form-control @error('text') is-invalid @enderror" name="text" id="text"  value='{{ old('text') }}'>
+                @error('text')
                  <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
