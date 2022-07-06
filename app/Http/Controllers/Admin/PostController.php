@@ -37,7 +37,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate() ;
+        $data = $request->validate(
+            [
+            'title' => 'required | max:50 | min:3',
+            'text' => 'required | min:10'
+            ]) ;
 
         $data = $request->all();
 
@@ -84,7 +88,15 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+                'title' => 'required | max:50 | min:3',
+                'text' => 'required | min:10'
+            ]) ;
+        $data['slug'] = Post::generateSlug($request['title']);
+        $post = Post::find($id);
+        $data = $request->all();
+        $post->update($data);
+        return redirect()->route('admin.posts.show', compact('post'));
     }
 
     /**
