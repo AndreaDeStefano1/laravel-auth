@@ -16,7 +16,9 @@
             <tr>
                 <td>{{ $post->id }}</td>
                 <td>{{ $post->title }}</td>
-                <td>XXX</td>
+                <td>
+                    <a class="btn btn-primary" href="{{ route('admin.posts.show', $post) }}"></a>
+                </td>
             </tr>
         @endforeach
     </tbody>
